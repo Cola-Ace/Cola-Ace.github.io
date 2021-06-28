@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>DMG 社区</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery-color/2.1.2/jquery.color.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="images/logo.jpg">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+    <div style="width:100%;height:100vh">
+        <aside class="left-nav">
+            <a href="" class="sign">
+                <span>DMG</span>
+            </a>
+            <ul class="menu">
+                <li class="menu-item menu-item-selected" id="list">
+                    <i class="las la-server"></i>
+                    <span class="server">服务器</span>
+                </li>
+                <li class="menu-item" id="stats">
+                    <i class="las la-calendar"></i>
+                    <span class="match-stats">比赛记录</span>
+                </li>
+                <li class="menu-item" id="ban">
+                    <i class="las la-lock"></i>
+                    <span class="ban-list">封禁列表</span>
+                </li>
+                <li class = "menu-item" id = "about">
+                    <i class="las la-info-circle"></i>
+                    <span class="about">关于</span>
+                </li>
+            </ul>
+        </aside>
+        <nav class="top-toolbar">
+            <ul class="toolbar-content">
+                <li class="toolbar-item">
+                    <a href="javascript:;" id="push-sidebar">
+                        <i class="las la-bars"></i>
+                    </a>
+                </li>
+                <li class="toolbar-item">
+                    <a href="#" id="refresh">
+                        <i class="las la-redo-alt"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <main class="main">
+            <iframe id = "iframe-content" src="components/list/index.html" style="background-color:#f0f2f5;"></iframe>
+        </main>
+    </div>
+</body>
+<script>
+    $(function() {
+        $("#push-sidebar").click(function() {
+            $(".left-nav").toggleClass('sidebar-collapse');
+        });
+        $(".menu-item").click(function() {
+            if ($(this).attr("id") == "about"){
+                swal("Powered by 可乐丶心飞扬 x GabrielxD", "大概耗时一周完成了现有功能？\n当前版本：beta 1.0", "info");
+                return;
+            }
+            $(this).addClass("menu-item-selected");
+            $(".menu-item").not(this).removeClass("menu-item-selected");
+            $("iframe").attr("src", `components/${this.id}/index.html`);
+        })
+        $("#refresh").click(function(){
+            $("#iframe-content").attr("src", $("#iframe-content").attr("src"));
+        });
+    });
+</script>
+</html>
